@@ -5,6 +5,7 @@ class UserModel {
   final String lastName;
   final String role;
   final DateTime registrationDate;
+  final DateTime? dateOfBirth;
 
   UserModel({
     required this.uid,
@@ -13,6 +14,7 @@ class UserModel {
     required this.lastName,
     required this.role,
     required this.registrationDate,
+    this.dateOfBirth,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class UserModel {
       'lastName': lastName,
       'role': role,
       'registrationDate': registrationDate.millisecondsSinceEpoch,
+      if (dateOfBirth != null) 'dateOfBirth': dateOfBirth!.millisecondsSinceEpoch,
     };
   }
 
@@ -34,6 +37,9 @@ class UserModel {
       lastName: map['lastName'],
       role: map['role'],
       registrationDate: DateTime.fromMillisecondsSinceEpoch(map['registrationDate']),
+      dateOfBirth: map['dateOfBirth'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['dateOfBirth'])
+          : null,
     );
   }
 }
